@@ -2,6 +2,9 @@ module Main exposing (..)
 
 {-| Demo of elm-simplify.
 -}
+import Collage as C exposing (Form, defaultLine)
+import Color
+import Element as E
 import Json.Decode exposing (Decoder, field, Value)
 import Json.Encode
 import Html exposing
@@ -18,7 +21,15 @@ import Html exposing
   , span, strong
   , text
   )
-import Html.Attributes as HAttr exposing (class, height, href, id, src, type_, value, width)
+import Html.Attributes as HAttr exposing
+  ( class
+  , height, href
+  , id
+  , src, style
+  , type_
+  , value
+  , width
+  )
 
 
 main : Program Flags Model Msg
@@ -65,6 +76,12 @@ init flags =
 
 
 {-|-}
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  Sub.none
+
+
+{-|-}
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   ( model
@@ -73,9 +90,13 @@ update msg model =
 
 
 {-|-}
-subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
+createCanvas : Model -> Html Msg
+createCanvas model =
+  [ C.rect 800 400
+      |> C.outlined (C.solid Color.blue)
+  ]
+    |> C.collage 720 400
+    |> E.toHtml
 
 
 {-|-}
@@ -189,12 +210,17 @@ view model =
         , text " data."
         ]
 
-      , canvas
+      , div
         [ id "canvas"
-        , width 800
-        , height 400
+        , style
+          [ ("width", "720px")
+          , ("height", "400px")
+          , ("padding", "0")
+          , ("margin", "0")
+          ]
         ]
-        []
+        [ createCanvas model
+        ]
       ]
 
     , dl []
