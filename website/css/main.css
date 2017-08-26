@@ -1,0 +1,117 @@
+.canvas-container {
+	margin: 20px 0;
+
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+
+	background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#f0f2f3));
+	background-image: -moz-linear-gradient(top, white, #eeeeee);
+	background-image: -ms-linear-gradient(top, white, #eeeeee);
+	background-image: -o-linear-gradient(top, white, #eeeeee);
+	background-image: linear-gradient(to bottom, white, #eeeeee);
+
+	box-shadow: 0 3px 20px #aaa;
+}
+.container {
+	width: 720px;
+	margin: 40px auto;
+	position: relative;
+	font: 14px/1.5 "Lucida Grande", Verdana, sans-serif;
+	color: #333;
+}
+p {
+	margin: 1.5em 0;
+}
+.canvas-container {
+	position: relative;
+	margin-bottom: 40px;
+	margin-top: 30px;
+}
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+.stats, .footer, .attribution, .quality {
+	color: #666;
+}
+.footer {
+	border-top: 1px solid #ccc;
+	padding-top: 1em;
+	margin-top: 3em;
+}
+.stats em {
+	font-style: normal;
+	color: black;
+}
+code {
+	color: #666;
+	background: #f7f7f7;
+	border: 1px solid #ddd;
+
+	padding: 2px 3px;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	font-family: Consolas, monospace;
+}
+dt {
+	color: #666;
+}
+dd {
+	margin-top: -1em;
+}
+h1 {
+	text-shadow: 5px 5px 10px #999;
+	font: bold 36px Georgia, serif;
+}
+a {
+	color: #0083CB;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+.stats, .attribution {
+	position: absolute;
+	left: 25px;
+	font-size: 12px;
+	line-height: 1.6;
+}
+.stats {
+	font-size: 16px;
+	top: 200px;
+	line-height: 1.8;
+}
+.tolerance-container {
+	margin: 15px;
+}
+.attribution {
+	bottom: 5px;
+	width: 500px;
+	text-shadow: 0 1px 0 white;
+}
+.quality {
+	position: absolute;
+	right: 25px;
+	top: 25px;
+	padding: 5px 10px 5px 5px;
+	border: 1px solid #ddd;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.social-buttons {
+	position: absolute;
+	top: -10px;
+	right: -30px;
+}

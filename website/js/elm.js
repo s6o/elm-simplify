@@ -7795,19 +7795,1116 @@ var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
+var _elm_lang$html$Html_Attributes$map = _elm_lang$virtual_dom$VirtualDom$mapProperty;
+var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
+var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'contextmenu', value);
+};
+var _elm_lang$html$Html_Attributes$draggable = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'draggable', value);
+};
+var _elm_lang$html$Html_Attributes$itemprop = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'itemprop', value);
+};
+var _elm_lang$html$Html_Attributes$tabindex = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'tabIndex',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$charset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'charset', value);
+};
+var _elm_lang$html$Html_Attributes$height = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'height',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$width = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'width',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$formaction = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'formAction', value);
+};
+var _elm_lang$html$Html_Attributes$list = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'list', value);
+};
+var _elm_lang$html$Html_Attributes$minlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'minLength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$maxlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'maxlength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$size = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'size',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$form = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'form', value);
+};
+var _elm_lang$html$Html_Attributes$cols = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'cols',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rows = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'rows',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$challenge = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'challenge', value);
+};
+var _elm_lang$html$Html_Attributes$media = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'media', value);
+};
+var _elm_lang$html$Html_Attributes$rel = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'rel', value);
+};
+var _elm_lang$html$Html_Attributes$datetime = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'datetime', value);
+};
+var _elm_lang$html$Html_Attributes$pubdate = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'pubdate', value);
+};
+var _elm_lang$html$Html_Attributes$colspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'colspan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rowspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'rowspan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$manifest = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'manifest', value);
+};
+var _elm_lang$html$Html_Attributes$property = _elm_lang$virtual_dom$VirtualDom$property;
+var _elm_lang$html$Html_Attributes$stringProperty = F2(
+	function (name, string) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$string(string));
+	});
+var _elm_lang$html$Html_Attributes$class = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'className', name);
+};
+var _elm_lang$html$Html_Attributes$id = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'id', name);
+};
+var _elm_lang$html$Html_Attributes$title = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'title', name);
+};
+var _elm_lang$html$Html_Attributes$accesskey = function ($char) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'accessKey',
+		_elm_lang$core$String$fromChar($char));
+};
+var _elm_lang$html$Html_Attributes$dir = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dir', value);
+};
+var _elm_lang$html$Html_Attributes$dropzone = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dropzone', value);
+};
+var _elm_lang$html$Html_Attributes$lang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'lang', value);
+};
+var _elm_lang$html$Html_Attributes$content = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'content', value);
+};
+var _elm_lang$html$Html_Attributes$httpEquiv = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'httpEquiv', value);
+};
+var _elm_lang$html$Html_Attributes$language = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'language', value);
+};
+var _elm_lang$html$Html_Attributes$src = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'src', value);
+};
+var _elm_lang$html$Html_Attributes$alt = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'alt', value);
+};
+var _elm_lang$html$Html_Attributes$preload = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'preload', value);
+};
+var _elm_lang$html$Html_Attributes$poster = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'poster', value);
+};
+var _elm_lang$html$Html_Attributes$kind = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'kind', value);
+};
+var _elm_lang$html$Html_Attributes$srclang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srclang', value);
+};
+var _elm_lang$html$Html_Attributes$sandbox = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'sandbox', value);
+};
+var _elm_lang$html$Html_Attributes$srcdoc = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srcdoc', value);
+};
+var _elm_lang$html$Html_Attributes$type_ = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'type', value);
+};
+var _elm_lang$html$Html_Attributes$value = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'value', value);
+};
+var _elm_lang$html$Html_Attributes$defaultValue = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'defaultValue', value);
+};
+var _elm_lang$html$Html_Attributes$placeholder = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'placeholder', value);
+};
+var _elm_lang$html$Html_Attributes$accept = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'accept', value);
+};
+var _elm_lang$html$Html_Attributes$acceptCharset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'acceptCharset', value);
+};
+var _elm_lang$html$Html_Attributes$action = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'action', value);
+};
+var _elm_lang$html$Html_Attributes$autocomplete = function (bool) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'autocomplete',
+		bool ? 'on' : 'off');
+};
+var _elm_lang$html$Html_Attributes$enctype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'enctype', value);
+};
+var _elm_lang$html$Html_Attributes$method = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'method', value);
+};
+var _elm_lang$html$Html_Attributes$name = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'name', value);
+};
+var _elm_lang$html$Html_Attributes$pattern = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'pattern', value);
+};
+var _elm_lang$html$Html_Attributes$for = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'htmlFor', value);
+};
+var _elm_lang$html$Html_Attributes$max = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'max', value);
+};
+var _elm_lang$html$Html_Attributes$min = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'min', value);
+};
+var _elm_lang$html$Html_Attributes$step = function (n) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'step', n);
+};
+var _elm_lang$html$Html_Attributes$wrap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'wrap', value);
+};
+var _elm_lang$html$Html_Attributes$usemap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'useMap', value);
+};
+var _elm_lang$html$Html_Attributes$shape = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'shape', value);
+};
+var _elm_lang$html$Html_Attributes$coords = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'coords', value);
+};
+var _elm_lang$html$Html_Attributes$keytype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'keytype', value);
+};
+var _elm_lang$html$Html_Attributes$align = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'align', value);
+};
+var _elm_lang$html$Html_Attributes$cite = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'cite', value);
+};
+var _elm_lang$html$Html_Attributes$href = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'href', value);
+};
+var _elm_lang$html$Html_Attributes$target = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'target', value);
+};
+var _elm_lang$html$Html_Attributes$downloadAs = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'download', value);
+};
+var _elm_lang$html$Html_Attributes$hreflang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'hreflang', value);
+};
+var _elm_lang$html$Html_Attributes$ping = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'ping', value);
+};
+var _elm_lang$html$Html_Attributes$start = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'start',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$headers = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'headers', value);
+};
+var _elm_lang$html$Html_Attributes$scope = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'scope', value);
+};
+var _elm_lang$html$Html_Attributes$boolProperty = F2(
+	function (name, bool) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$bool(bool));
+	});
+var _elm_lang$html$Html_Attributes$hidden = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'hidden', bool);
+};
+var _elm_lang$html$Html_Attributes$contenteditable = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'contentEditable', bool);
+};
+var _elm_lang$html$Html_Attributes$spellcheck = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'spellcheck', bool);
+};
+var _elm_lang$html$Html_Attributes$async = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'async', bool);
+};
+var _elm_lang$html$Html_Attributes$defer = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'defer', bool);
+};
+var _elm_lang$html$Html_Attributes$scoped = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'scoped', bool);
+};
+var _elm_lang$html$Html_Attributes$autoplay = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autoplay', bool);
+};
+var _elm_lang$html$Html_Attributes$controls = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'controls', bool);
+};
+var _elm_lang$html$Html_Attributes$loop = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'loop', bool);
+};
+var _elm_lang$html$Html_Attributes$default = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'default', bool);
+};
+var _elm_lang$html$Html_Attributes$seamless = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'seamless', bool);
+};
+var _elm_lang$html$Html_Attributes$checked = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'checked', bool);
+};
+var _elm_lang$html$Html_Attributes$selected = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'selected', bool);
+};
+var _elm_lang$html$Html_Attributes$autofocus = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autofocus', bool);
+};
+var _elm_lang$html$Html_Attributes$disabled = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'disabled', bool);
+};
+var _elm_lang$html$Html_Attributes$multiple = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'multiple', bool);
+};
+var _elm_lang$html$Html_Attributes$novalidate = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'noValidate', bool);
+};
+var _elm_lang$html$Html_Attributes$readonly = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'readOnly', bool);
+};
+var _elm_lang$html$Html_Attributes$required = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'required', bool);
+};
+var _elm_lang$html$Html_Attributes$ismap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'isMap', value);
+};
+var _elm_lang$html$Html_Attributes$download = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'download', bool);
+};
+var _elm_lang$html$Html_Attributes$reversed = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'reversed', bool);
+};
+var _elm_lang$html$Html_Attributes$classList = function (list) {
+	return _elm_lang$html$Html_Attributes$class(
+		A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Tuple$first,
+				A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list))));
+};
+var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
+
 var _s6o$elm_simplify$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Loaded test-point count: ',
-					_elm_lang$core$Basics$toString(
-						_elm_lang$core$List$length(model.data)))),
+			_0: _elm_lang$html$Html_Attributes$class('container'),
 			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('elm-simplify'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('social-buttons'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$iframe,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src('http://ghbtns.com/github-btn.html?user=s6o&amp;repo=elm-simplify&amp;type=watch&amp;count=true'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'allowtransparency', 'true'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'frameborder', '0'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'scrolling', '0'),
+											_1: {
+												ctor: '::',
+												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'width', '95px'),
+												_1: {
+													ctor: '::',
+													_0: A2(_elm_lang$html$Html_Attributes$attribute, 'height', '20px'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('elm-simplify ('),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$strong,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('License'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(': '),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$em,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('BSD'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(', '),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$strong,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('GitHub'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(': '),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$a,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$href('http://github.com/s6o/elm-simplify'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('s6o / elm-simplify'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(', '),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$strong,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('package.elm-lang.org'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text(': '),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$em,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('s6o/elm-simplify'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(
+																				A2(_elm_lang$core$Basics_ops['++'], ') is a port of the 2D variant of the tiny high-performance', ' JavaScript polyline simplification library ')),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$a,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$href('http://mourner.github.io/simplify-js/'),
+																						_1: {ctor: '[]'}
+																					},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(' Simplify.js'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('. It uses a combination of '),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$a,
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$href('http://en.wikipedia.org/wiki/Ramer-Douglas-Peucker_algorithm'),
+																								_1: {ctor: '[]'}
+																							},
+																							{
+																								ctor: '::',
+																								_0: _elm_lang$html$Html$text('Ramer-Douglas-Peucker'),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html$text(' and Radial Distance algorithms.'),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$p,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'Polyline simplification dramatically reduces the number of points in a',
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											' polyline while retaining its shape, giving a huge performance boost when',
+											A2(_elm_lang$core$Basics_ops['++'], ' processing it and also reducing visual noise. For example, it\'s essential', ' when rendering a 70k-points line chart or a map route in the browser using Canvas or SVG.')))),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('canvas-container cf'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$p,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('tolerance-container'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$input,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$id('tolerance'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$type_('text'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$value('0.8'),
+															_1: {ctor: '[]'}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$p,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('stats'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$em,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$id('point-num-before'),
+														_1: {ctor: '[]'}
+													},
+													{ctor: '[]'}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('points, simplified with tolerance: '),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$em,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$id('tolerance-val'),
+																_1: {ctor: '[]'}
+															},
+															{ctor: '[]'}),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('px'),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$br,
+																	{ctor: '[]'},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('After simplification: '),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$em,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$id('point-num-after'),
+																				_1: {ctor: '[]'}
+																			},
+																			{ctor: '[]'}),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('points (~'),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$em,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$id('point-num-times'),
+																						_1: {ctor: '[]'}
+																					},
+																					{ctor: '[]'}),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('times less)'),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$br,
+																							{ctor: '[]'},
+																							{ctor: '[]'}),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html$text(' Performed in '),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$em,
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$id('duration'),
+																										_1: {ctor: '[]'}
+																									},
+																									{ctor: '[]'}),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html$text(' ms'),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$p,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('quality'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$label,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$input,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$id('quality'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(' highest quality'),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$p,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('attribution'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(
+															A2(_elm_lang$core$Basics_ops['++'], 'The test data for the example is actually a ~10700 mile car route', ' from Lisboa, Portugal to Singapore on a world scale, generated by the ')),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$a,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$href('http://developers.cloudmade.com/wiki/navengine/Documentation'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('CloudMade Navigation service'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(' based on '),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$a,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$href('http://openstreetmap.org'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('OpenStreetMap'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(' data.'),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$canvas,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$id('canvas'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$width(800),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$height(400),
+																	_1: {ctor: '[]'}
+																}
+															}
+														},
+														{ctor: '[]'}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$dl,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$dt,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$code,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('simplifyDefault : List (Float, Float) -> List (Float, Float)'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$dd,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$p,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(
+																A2(_elm_lang$core$Basics_ops['++'], 'Convenience function. `PixelTolerance` is set to `OnePixel` ', 'and `Quality` is set to `Low`. Returns a list of simplified points.')),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$dt,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$code,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('simplify : PixelTolerance -> Qaulity -> List (Float, Float) -> List (Float, Float)'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$dd,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$p,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Returns a list of simplified points.'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$dt,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$code,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('\n            type PixelTolerance\n              = OnePixel\n              | Pixels Int\n            '),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$dd,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$p,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Affects the amount of simplification (in the same metric as the point coordinates).'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$dt,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$code,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('\n            type Quality\n              = Low\n              | High\n            '),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$dd,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$p,
+																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text(
+																						A2(_elm_lang$core$Basics_ops['++'], '`High` excludes distance-based pre-processing step which leads to', ' highest quality simplification, but runs slower.')),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$dt,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$code,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('points : List (Float, Float)'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$dd,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$p,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('A list of tuples - pairs of x, y coordinates - of '),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$code,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('(Float, Float)'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$p,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Note: the 3D version of Simplify.js is not yet supported.'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$p,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('footer'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html_Attributes$property,
+																'innerHTML',
+																_elm_lang$core$Json_Encode$string('&copy;')),
+															_1: {ctor: '[]'}
+														},
+														{ctor: '[]'}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(' 2017, '),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$a,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$href('https://github.com/s6o/elm-simplify'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Oliver Sõro'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('. Released under '),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$a,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$href('https://raw.github.com/s6o/elm-simplify/master/LICENSE'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('BSD license'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('.'),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		});
 };
 var _s6o$elm_simplify$Main$subscriptions = function (model) {
