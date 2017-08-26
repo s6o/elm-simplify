@@ -103,7 +103,8 @@ a:hover {
 	right: 25px;
 	top: 25px;
 	padding: 5px 10px 5px 5px;
-	border: 1px solid #ddd;
+  border: 1px solid #ddd;
+  z-index: 100;
 
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
