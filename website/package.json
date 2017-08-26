@@ -1,14 +1,14 @@
 {
   "name": "elm_simplify_demo",
-  "main": "../elm.js",
+  "main": "./js/elm.js",
   "version": "1.0.0",
   "dependencies": {
   },
   "private": true,
   "scripts": {
-    "watch-elm"  : "chokidar './*.elm' -c 'elm-make ./Main.elm --output ./../elm.js' --initial",
+    "watch-elm"  : "chokidar './*.elm' -c 'elm-make ./Main.elm --output ./js/elm.js' --initial",
     "watch" : "npm run watch-elm",
-    "build-elm": "elm-make ./Main.elm --output ./../elm.js && uglifyjs ./../elm.js --screw-ie8 -c -m -o ./../elm.min.js",
+    "build-elm": "elm-make ./Main.elm --output ./js/elm.js && uglifyjs ./js/elm.js --screw-ie8 -c -m -o ./js/elm.min.js",
     "build": "npm run build-elm"
   },
   "devDependencies": {
