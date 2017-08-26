@@ -225,7 +225,7 @@ view model =
             """
             type PixelTolerance
               = OnePixel
-              | Pixels Int
+              | Pixels Float
             """
           ]
         ]
