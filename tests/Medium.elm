@@ -1,5 +1,6 @@
 module Medium exposing
   ( suite
+  , points
   )
 
 import Expect exposing (Expectation)
