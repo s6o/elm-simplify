@@ -3,21 +3,25 @@ module Main exposing (..)
 --import Benchmark exposing (Benchmark, benchmark3)
 --import Benchmark.Runner exposing (BenchmarkProgram, program)
 import Benchmark.LowLevel as B
+import Json.Decode exposing (Decoder, field, Value)
 import Html exposing (Html, div, text)
-import Medium exposing (points)
 import Simplify as S exposing (PixelTolerance, Quality)
 import Task
 import Time exposing (Time)
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-  Html.program
-    { init = init
-    , update = update
-    , subscriptions = subscriptions
-    , view = view
-    }
+  Html.programWithFlags
+   { init = init
+   , update = update
+   , subscriptions = subscriptions
+   , view = view
+   }
+
+type alias Flags =
+  { data : Value
+  }
 
 type alias Model =
   { dataTotal : Int
@@ -30,16 +34,31 @@ type Msg
   | Measure (List (Float, Float), Time)
 
 
-init : (Model, Cmd Msg)
-init =
-  ( Model (List.length points) Nothing Nothing
-  , Cmd.batch
-    [ B.operation3 S.simplify S.OnePixel S.Low points
-        |> B.sample 1
-        |> Task.attempt Bench
-    , simplifyCmd S.OnePixel S.Low points
-    ]
-  )
+{-| JSON decoder for test data loded via `Flags`
+-}
+decoder : Decoder (List (Float, Float))
+decoder =
+  Json.Decode.list
+    <| Json.Decode.map2
+        (\x y -> (x, y))
+        (field "x" Json.Decode.float)
+        (field "y" Json.Decode.float)
+
+init : Flags -> (Model, Cmd Msg)
+init flags =
+  let
+    points =
+      Json.Decode.decodeValue decoder flags.data
+          |> Result.withDefault []
+  in
+    ( Model (List.length points) Nothing Nothing
+    , Cmd.batch
+      [ B.operation3 S.simplify S.OnePixel S.Low points
+          |> B.sample 1
+          |> Task.attempt Bench
+      , simplifyCmd S.OnePixel S.Low points
+      ]
+    )
 
 simplifyCmd : PixelTolerance -> Quality -> List (Float, Float) -> Cmd Msg
 simplifyCmd pxlt q points =
