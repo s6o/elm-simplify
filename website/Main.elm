@@ -4,6 +4,7 @@ module Main exposing (..)
 -}
 import Collage as C exposing (Form, defaultLine)
 import Color
+import Dict exposing (Dict)
 import Element as E
 import Json.Decode exposing (Decoder, field, Value)
 import Json.Encode
@@ -57,17 +58,17 @@ type alias Flags =
 -}
 type alias Model =
   { csize : { width : Int, height : Int}
-  , data : List (Float, Float)
+  , data : Dict Int (Float, Float)
   , dataTotal : Int
   , duration : Maybe Time
   , pixelTolerance : PixelTolerance
   , quality : Quality
-  , simplified : List (Float, Float)
+  , simplified : Dict Int (Float, Float)
   , simplifiedTotal : Maybe Int
   }
 
 type Msg
-  = Measure (List (Float, Float), Time)
+  = Measure (Dict Int (Float, Float), Time)
   | QualityHigh Bool
   | Slider String
   | Tolerance String
@@ -91,16 +92,18 @@ init flags =
     initData =
       Json.Decode.decodeValue decoder flags.data
           |> Result.withDefault []
+          |> List.indexedMap (,)
+          |> Dict.fromList
     initTolerance = S.Pixels 0.8
     initQuality = S.Low
   in
     ( { csize = { width = 720, height = 400 }
       , data = initData
-      , dataTotal = List.length initData
+      , dataTotal = Dict.size initData
       , duration = Nothing
       , pixelTolerance = initTolerance
       , quality = initQuality
-      , simplified = []
+      , simplified = Dict.empty
       , simplifiedTotal = Nothing
       }
     , simplifyCmd initTolerance initQuality initData
@@ -118,7 +121,7 @@ pxlf pxlt =
 
 {-| Run simplification with timing
 -}
-simplifyCmd : PixelTolerance -> Quality -> List (Float, Float) -> Cmd Msg
+simplifyCmd : PixelTolerance -> Quality -> Dict Int (Float, Float) -> Cmd Msg
 simplifyCmd pxlt q points =
   Task.perform Measure <|
     ( Time.now
@@ -154,7 +157,7 @@ update msg model =
         ( { model
             | duration = Just t
             , simplified = spoints
-            , simplifiedTotal = Just <| List.length spoints
+            , simplifiedTotal = Just <| Dict.size spoints
           }
         , Cmd.none
         )
@@ -188,6 +191,7 @@ createCanvas model =
       }
   in
     [ model.simplified
+        |> Dict.values
         |> List.map (toCanvasPoint model)
         |> C.path
         |> C.traced pathStyle
@@ -360,7 +364,7 @@ view model =
     , dl []
       [ dt []
         [ code []
-          [ text "simplifyDefault : List (Float, Float) -> List (Float, Float)"
+          [ text "simplifyDefault : Dict Int (Float, Float) -> Dict Int (Float, Float)"
           ]
         ]
       , dd []
@@ -372,7 +376,7 @@ view model =
 
       , dt []
         [ code []
-          [ text "simplify : PixelTolerance -> Qaulity -> List (Float, Float) -> List (Float, Float)"
+          [ text "simplify : PixelTolerance -> Qaulity -> Dict Int (Float, Float) -> Dict Int (Float, Float)"
           ]
         ]
       , dd []
@@ -415,11 +419,11 @@ view model =
 
       , dt []
         [ code []
-          [ text "points : List (Float, Float)" ]
+          [ text "points : Dict Int (Float, Float)" ]
         ]
       , dd []
         [ p []
-          [ text "A list of tuples - pairs of x, y coordinates - of "
+          [ text "A dictionary of tuples - pairs of x, y coordinates - of "
           , code [] [ text "(Float, Float)" ]
           ]
         , p []
