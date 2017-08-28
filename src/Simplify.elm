@@ -103,35 +103,46 @@ simplifyDouglasPeucker points sqTolerance =
     inputPoints =
       points |> List.indexedMap (,) |> Dict.fromList
   in
-    simplifyDPStep inputPoints firstIndex lastIndex sqTolerance []
-      |> (\accum ->
-        Maybe.map2 (\fp lp -> (fp :: accum) ++ [lp]) (Dict.get firstIndex inputPoints) (Dict.get lastIndex inputPoints)
-          |> Maybe.withDefault accum
+    simplifyDPStep inputPoints firstIndex lastIndex sqTolerance ([], [])
+      |> (\(_, accum) ->
+        let
+          sortedAccum = accum |> Dict.fromList |> Dict.values
+        in
+          Maybe.map2 (\fp lp -> (fp :: sortedAccum) ++ [lp]) (Dict.get firstIndex inputPoints) (Dict.get lastIndex inputPoints)
+            |> Maybe.withDefault sortedAccum
       )
 
 {-|-}
-simplifyDPStep : Dict Int (Float, Float) -> Int -> Int -> Float -> List (Float, Float) -> List (Float, Float)
-simplifyDPStep points firstIndex lastIndex sqTolerance accum =
+simplifyDPStep : Dict Int (Float, Float) -> Int -> Int -> Float -> (List (Int, Int), List (Int, (Float, Float))) -> (List (Int, Int), List (Int, (Float, Float)))
+simplifyDPStep points firstIndex lastIndex sqTolerance (accumRanges, accumPoints) =
   let
     (maxSqDist, maxIndex, maxPoint) =
       findMaxSquareSegmentDistance points firstIndex lastIndex sqTolerance
   in
     case maxSqDist > sqTolerance of
-      False -> accum
+      False ->
+        case accumRanges of
+          [] ->
+            (accumRanges, accumPoints)
+          (f, t) :: rest ->
+            simplifyDPStep points f t sqTolerance (rest, accumPoints)
       True ->
-        ( if maxIndex - firstIndex > 1 then
-            simplifyDPStep points firstIndex maxIndex sqTolerance accum
-          else
-            accum
-        )
-        ++
-        (maxPoint :: accum)
-        ++
-        ( if lastIndex - maxIndex > 1 then
-            simplifyDPStep points maxIndex lastIndex sqTolerance accum
-          else
-            accum
-        )
+        let
+          nextPoints = (maxIndex, maxPoint) :: accumPoints
+          nextRanges =
+            [ (maxIndex - firstIndex > 1, (firstIndex, maxIndex))
+            , (lastIndex - maxIndex > 1, (maxIndex, lastIndex))
+            ]
+              |> List.foldl (\(cond, range) accum ->
+                if cond then range :: accum else accum
+              ) accumRanges
+        in
+          case nextRanges of
+            [] ->
+              (nextRanges, nextPoints)
+            (f, t) :: rest ->
+              simplifyDPStep points f t sqTolerance (rest, nextPoints)
+
 
 {-|-}
 findMaxSquareSegmentDistance : Dict Int (Float, Float) -> Int -> Int -> Float -> (Float, Int, (Float, Float))
