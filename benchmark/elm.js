@@ -8392,22 +8392,82 @@ var _s6o$elm_simplify$Simplify$findMaxSquareSegmentDistance = F4(
 				lastPoint));
 	});
 var _s6o$elm_simplify$Simplify$simplifyDPStep = F5(
-	function (points, firstIndex, lastIndex, sqTolerance, accum) {
-		var _p19 = A4(_s6o$elm_simplify$Simplify$findMaxSquareSegmentDistance, points, firstIndex, lastIndex, sqTolerance);
-		var maxSqDist = _p19._0;
-		var maxIndex = _p19._1;
-		var maxPoint = _p19._2;
-		var _p20 = _elm_lang$core$Native_Utils.cmp(maxSqDist, sqTolerance) > 0;
-		if (_p20 === false) {
-			return accum;
-		} else {
-			return A2(
-				_elm_lang$core$Basics_ops['++'],
-				(_elm_lang$core$Native_Utils.cmp(maxIndex - firstIndex, 1) > 0) ? A5(_s6o$elm_simplify$Simplify$simplifyDPStep, points, firstIndex, maxIndex, sqTolerance, accum) : accum,
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					{ctor: '::', _0: maxPoint, _1: accum},
-					(_elm_lang$core$Native_Utils.cmp(lastIndex - maxIndex, 1) > 0) ? A5(_s6o$elm_simplify$Simplify$simplifyDPStep, points, maxIndex, lastIndex, sqTolerance, accum) : accum));
+	function (points, firstIndex, lastIndex, sqTolerance, _p19) {
+		simplifyDPStep:
+		while (true) {
+			var _p20 = _p19;
+			var _p28 = _p20._0;
+			var _p27 = _p20._1;
+			var _p21 = A4(_s6o$elm_simplify$Simplify$findMaxSquareSegmentDistance, points, firstIndex, lastIndex, sqTolerance);
+			var maxSqDist = _p21._0;
+			var maxIndex = _p21._1;
+			var maxPoint = _p21._2;
+			var _p22 = _elm_lang$core$Native_Utils.cmp(maxSqDist, sqTolerance) > 0;
+			if (_p22 === false) {
+				var _p23 = _p28;
+				if (_p23.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: _p28, _1: _p27};
+				} else {
+					var _v7 = points,
+						_v8 = _p23._0._0,
+						_v9 = _p23._0._1,
+						_v10 = sqTolerance,
+						_v11 = {ctor: '_Tuple2', _0: _p23._1, _1: _p27};
+					points = _v7;
+					firstIndex = _v8;
+					lastIndex = _v9;
+					sqTolerance = _v10;
+					_p19 = _v11;
+					continue simplifyDPStep;
+				}
+			} else {
+				var nextRanges = A3(
+					_elm_lang$core$List$foldl,
+					F2(
+						function (_p24, accum) {
+							var _p25 = _p24;
+							return _p25._0 ? {ctor: '::', _0: _p25._1, _1: accum} : accum;
+						}),
+					_p28,
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.cmp(maxIndex - firstIndex, 1) > 0,
+							_1: {ctor: '_Tuple2', _0: firstIndex, _1: maxIndex}
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.cmp(lastIndex - maxIndex, 1) > 0,
+								_1: {ctor: '_Tuple2', _0: maxIndex, _1: lastIndex}
+							},
+							_1: {ctor: '[]'}
+						}
+					});
+				var nextPoints = {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: maxIndex, _1: maxPoint},
+					_1: _p27
+				};
+				var _p26 = nextRanges;
+				if (_p26.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: nextRanges, _1: nextPoints};
+				} else {
+					var _v14 = points,
+						_v15 = _p26._0._0,
+						_v16 = _p26._0._1,
+						_v17 = sqTolerance,
+						_v18 = {ctor: '_Tuple2', _0: _p26._1, _1: nextPoints};
+					points = _v14;
+					firstIndex = _v15;
+					lastIndex = _v16;
+					sqTolerance = _v17;
+					_p19 = _v18;
+					continue simplifyDPStep;
+				}
+			}
 		}
 	});
 var _s6o$elm_simplify$Simplify$simplifyDouglasPeucker = F2(
@@ -8422,17 +8482,20 @@ var _s6o$elm_simplify$Simplify$simplifyDouglasPeucker = F2(
 				points));
 		var lastIndex = _elm_lang$core$List$length(points) - 1;
 		var firstIndex = 0;
-		return function (accum) {
+		return function (_p29) {
+			var _p30 = _p29;
+			var sortedAccum = _elm_lang$core$Dict$values(
+				_elm_lang$core$Dict$fromList(_p30._1));
 			return A2(
 				_elm_lang$core$Maybe$withDefault,
-				accum,
+				sortedAccum,
 				A3(
 					_elm_lang$core$Maybe$map2,
 					F2(
 						function (fp, lp) {
 							return A2(
 								_elm_lang$core$Basics_ops['++'],
-								{ctor: '::', _0: fp, _1: accum},
+								{ctor: '::', _0: fp, _1: sortedAccum},
 								{
 									ctor: '::',
 									_0: lp,
@@ -8448,14 +8511,18 @@ var _s6o$elm_simplify$Simplify$simplifyDouglasPeucker = F2(
 				firstIndex,
 				lastIndex,
 				sqTolerance,
-				{ctor: '[]'}));
+				{
+					ctor: '_Tuple2',
+					_0: {ctor: '[]'},
+					_1: {ctor: '[]'}
+				}));
 	});
 var _s6o$elm_simplify$Simplify$squareDistance = F2(
-	function (_p22, _p21) {
-		var _p23 = _p22;
-		var _p24 = _p21;
-		var dy = _p23._1 - _p24._1;
-		var dx = _p23._0 - _p24._0;
+	function (_p32, _p31) {
+		var _p33 = _p32;
+		var _p34 = _p31;
+		var dy = _p33._1 - _p34._1;
+		var dx = _p33._0 - _p34._0;
 		return (dx * dx) + (dy * dy);
 	});
 var _s6o$elm_simplify$Simplify$simplifyRadialDist = F2(
@@ -8464,36 +8531,36 @@ var _s6o$elm_simplify$Simplify$simplifyRadialDist = F2(
 			function (pointList, sqt, accum) {
 				checkSqDist:
 				while (true) {
-					var _p25 = {
+					var _p35 = {
 						ctor: '_Tuple2',
 						_0: pointList,
 						_1: _elm_lang$core$List$head(accum)
 					};
-					if (_p25._0.ctor === '[]') {
+					if (_p35._0.ctor === '[]') {
 						return accum;
 					} else {
-						if (_p25._0._1.ctor === '[]') {
-							return {ctor: '::', _0: _p25._0._0, _1: accum};
+						if (_p35._0._1.ctor === '[]') {
+							return {ctor: '::', _0: _p35._0._0, _1: accum};
 						} else {
-							if (_p25._1.ctor === 'Just') {
-								var _p27 = _p25._0._0;
-								var _p26 = _p25._0._1;
-								var sqDist = A2(_s6o$elm_simplify$Simplify$squareDistance, _p27, _p25._1._0);
+							if (_p35._1.ctor === 'Just') {
+								var _p37 = _p35._0._0;
+								var _p36 = _p35._0._1;
+								var sqDist = A2(_s6o$elm_simplify$Simplify$squareDistance, _p37, _p35._1._0);
 								if (_elm_lang$core$Native_Utils.cmp(sqDist, sqt) > 0) {
-									var _v8 = _p26,
-										_v9 = sqt,
-										_v10 = {ctor: '::', _0: _p27, _1: accum};
-									pointList = _v8;
-									sqt = _v9;
-									accum = _v10;
+									var _v23 = _p36,
+										_v24 = sqt,
+										_v25 = {ctor: '::', _0: _p37, _1: accum};
+									pointList = _v23;
+									sqt = _v24;
+									accum = _v25;
 									continue checkSqDist;
 								} else {
-									var _v11 = _p26,
-										_v12 = sqt,
-										_v13 = accum;
-									pointList = _v11;
-									sqt = _v12;
-									accum = _v13;
+									var _v26 = _p36,
+										_v27 = sqt,
+										_v28 = accum;
+									pointList = _v26;
+									sqt = _v27;
+									accum = _v28;
 									continue checkSqDist;
 								}
 							} else {
@@ -8515,17 +8582,17 @@ var _s6o$elm_simplify$Simplify$simplify = F3(
 			return points;
 		} else {
 			var sqTolerance = function () {
-				var _p28 = tolerance;
-				if (_p28.ctor === 'OnePixel') {
+				var _p38 = tolerance;
+				if (_p38.ctor === 'OnePixel') {
 					return 1;
 				} else {
-					var _p29 = _p28._0;
-					return _p29 * _p29;
+					var _p39 = _p38._0;
+					return _p39 * _p39;
 				}
 			}();
 			var newPoints = function () {
-				var _p30 = quality;
-				if (_p30.ctor === 'Low') {
+				var _p40 = quality;
+				if (_p40.ctor === 'Low') {
 					return A2(_s6o$elm_simplify$Simplify$simplifyRadialDist, points, sqTolerance);
 				} else {
 					return points;
