@@ -8472,42 +8472,37 @@ var _s6o$elm_simplify$Simplify$simplifyDPStep = F5(
 	});
 var _s6o$elm_simplify$Simplify$simplifyDouglasPeucker = F2(
 	function (points, sqTolerance) {
-		var inputPoints = _elm_lang$core$Dict$fromList(
-			A2(
-				_elm_lang$core$List$indexedMap,
-				F2(
-					function (v0, v1) {
-						return {ctor: '_Tuple2', _0: v0, _1: v1};
-					}),
-				points));
-		var lastIndex = _elm_lang$core$List$length(points) - 1;
+		var lastIndex = _elm_lang$core$Dict$size(points) - 1;
+		var lastPoint = A2(_elm_lang$core$Dict$get, lastIndex, points);
 		var firstIndex = 0;
+		var firstPoint = A2(_elm_lang$core$Dict$get, firstIndex, points);
 		return function (_p29) {
 			var _p30 = _p29;
-			var sortedAccum = _elm_lang$core$Dict$values(
-				_elm_lang$core$Dict$fromList(_p30._1));
-			return A2(
-				_elm_lang$core$Maybe$withDefault,
-				sortedAccum,
-				A3(
-					_elm_lang$core$Maybe$map2,
-					F2(
-						function (fp, lp) {
-							return A2(
-								_elm_lang$core$Basics_ops['++'],
-								{ctor: '::', _0: fp, _1: sortedAccum},
-								{
-									ctor: '::',
-									_0: lp,
-									_1: {ctor: '[]'}
-								});
-						}),
-					A2(_elm_lang$core$Dict$get, firstIndex, inputPoints),
-					A2(_elm_lang$core$Dict$get, lastIndex, inputPoints)));
+			var _p31 = {ctor: '_Tuple2', _0: firstPoint, _1: lastPoint};
+			if (((_p31.ctor === '_Tuple2') && (_p31._0.ctor === 'Just')) && (_p31._1.ctor === 'Just')) {
+				return _elm_lang$core$Dict$fromList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: firstIndex, _1: _p31._0._0},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: lastIndex, _1: _p31._1._0},
+							_1: _p30._1
+						}
+					});
+			} else {
+				return _elm_lang$core$Native_Utils.crashCase(
+					'Simplify',
+					{
+						start: {line: 108, column: 9},
+						end: {line: 112, column: 91}
+					},
+					_p31)('Should not be here: something went wrong in the public interface');
+			}
 		}(
 			A5(
 				_s6o$elm_simplify$Simplify$simplifyDPStep,
-				inputPoints,
+				points,
 				firstIndex,
 				lastIndex,
 				sqTolerance,
@@ -8518,82 +8513,133 @@ var _s6o$elm_simplify$Simplify$simplifyDouglasPeucker = F2(
 				}));
 	});
 var _s6o$elm_simplify$Simplify$squareDistance = F2(
-	function (_p32, _p31) {
-		var _p33 = _p32;
-		var _p34 = _p31;
-		var dy = _p33._1 - _p34._1;
-		var dx = _p33._0 - _p34._0;
+	function (_p34, _p33) {
+		var _p35 = _p34;
+		var _p36 = _p33;
+		var dy = _p35._1 - _p36._1;
+		var dx = _p35._0 - _p36._0;
 		return (dx * dx) + (dy * dy);
 	});
-var _s6o$elm_simplify$Simplify$simplifyRadialDist = F2(
+var _s6o$elm_simplify$Simplify$simplifyRadialDistance = F2(
 	function (points, sqTolerance) {
 		var checkSqDist = F3(
-			function (pointList, sqt, accum) {
+			function (pointList, sqt, _p37) {
 				checkSqDist:
 				while (true) {
-					var _p35 = {
+					var _p38 = _p37;
+					var _p43 = _p38._0;
+					var _p42 = _p38._1;
+					var _p39 = {
 						ctor: '_Tuple2',
 						_0: pointList,
-						_1: _elm_lang$core$List$head(accum)
+						_1: _elm_lang$core$List$head(_p42)
 					};
-					if (_p35._0.ctor === '[]') {
-						return accum;
-					} else {
-						if (_p35._0._1.ctor === '[]') {
-							return {ctor: '::', _0: _p35._0._0, _1: accum};
+					_v24_1:
+					do {
+						if (_p39._0.ctor === '[]') {
+							return {ctor: '_Tuple2', _0: _p43, _1: _p42};
 						} else {
-							if (_p35._1.ctor === 'Just') {
-								var _p37 = _p35._0._0;
-								var _p36 = _p35._0._1;
-								var sqDist = A2(_s6o$elm_simplify$Simplify$squareDistance, _p37, _p35._1._0);
-								if (_elm_lang$core$Native_Utils.cmp(sqDist, sqt) > 0) {
-									var _v23 = _p36,
-										_v24 = sqt,
-										_v25 = {ctor: '::', _0: _p37, _1: accum};
-									pointList = _v23;
-									sqt = _v24;
-									accum = _v25;
-									continue checkSqDist;
+							if (_p39._1.ctor === 'Nothing') {
+								if (_p39._0._1.ctor === '[]') {
+									break _v24_1;
 								} else {
-									var _v26 = _p36,
-										_v27 = sqt,
-										_v28 = accum;
-									pointList = _v26;
-									sqt = _v27;
-									accum = _v28;
+									var _v25 = _p39._0._1,
+										_v26 = sqt,
+										_v27 = {
+										ctor: '_Tuple2',
+										_0: _p43 + 1,
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: _p43, _1: _p39._0._0},
+											_1: _p42
+										}
+									};
+									pointList = _v25;
+									sqt = _v26;
+									_p37 = _v27;
 									continue checkSqDist;
 								}
 							} else {
-								return accum;
+								if (_p39._0._1.ctor === '[]') {
+									break _v24_1;
+								} else {
+									var _p41 = _p39._0._0;
+									var _p40 = _p39._0._1;
+									var sqDist = A2(_s6o$elm_simplify$Simplify$squareDistance, _p41, _p39._1._0._1);
+									if (_elm_lang$core$Native_Utils.cmp(sqDist, sqt) > 0) {
+										var _v28 = _p40,
+											_v29 = sqt,
+											_v30 = {
+											ctor: '_Tuple2',
+											_0: _p43 + 1,
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: _p43, _1: _p41},
+												_1: _p42
+											}
+										};
+										pointList = _v28;
+										sqt = _v29;
+										_p37 = _v30;
+										continue checkSqDist;
+									} else {
+										var _v31 = _p40,
+											_v32 = sqt,
+											_v33 = {ctor: '_Tuple2', _0: _p43, _1: _p42};
+										pointList = _v31;
+										sqt = _v32;
+										_p37 = _v33;
+										continue checkSqDist;
+									}
+								}
 							}
 						}
-					}
+					} while(false);
+					return {
+						ctor: '_Tuple2',
+						_0: _p43 + 1,
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: _p43, _1: _p39._0._0},
+							_1: _p42
+						}
+					};
 				}
 			});
-		var initAccum = A2(_elm_lang$core$List$take, 1, points);
-		return _elm_lang$core$List$reverse(
-			A3(checkSqDist, points, sqTolerance, initAccum));
+		return function (_p44) {
+			var _p45 = _p44;
+			return _elm_lang$core$Dict$fromList(_p45._1);
+		}(
+			A3(
+				checkSqDist,
+				_elm_lang$core$Dict$values(points),
+				sqTolerance,
+				{
+					ctor: '_Tuple2',
+					_0: 0,
+					_1: {ctor: '[]'}
+				}));
 	});
 var _s6o$elm_simplify$Simplify$simplify = F3(
 	function (tolerance, quality, points) {
 		if (_elm_lang$core$Native_Utils.cmp(
-			_elm_lang$core$List$length(points),
+			_elm_lang$core$Dict$size(points),
 			2) < 1) {
 			return points;
 		} else {
 			var sqTolerance = function () {
-				var _p38 = tolerance;
-				if (_p38.ctor === 'OnePixel') {
+				var _p46 = tolerance;
+				if (_p46.ctor === 'OnePixel') {
 					return 1;
 				} else {
-					var _p39 = _p38._0;
-					return _p39 * _p39;
+					var _p47 = _p46._0;
+					return _p47 * _p47;
 				}
 			}();
 			var newPoints = function () {
-				var _p40 = quality;
-				if (_p40.ctor === 'Low') {
-					return A2(_s6o$elm_simplify$Simplify$simplifyRadialDist, points, sqTolerance);
+				var _p48 = quality;
+				if (_p48.ctor === 'Low') {
+					return A2(_s6o$elm_simplify$Simplify$simplifyRadialDistance, points, sqTolerance);
 				} else {
 					return points;
 				}
@@ -8756,15 +8802,22 @@ var _s6o$elm_simplify$Main$Bench = function (a) {
 	return {ctor: 'Bench', _0: a};
 };
 var _s6o$elm_simplify$Main$init = function (flags) {
-	var points = A2(
-		_elm_lang$core$Result$withDefault,
-		{ctor: '[]'},
-		A2(_elm_lang$core$Json_Decode$decodeValue, _s6o$elm_simplify$Main$decoder, flags.data));
+	var points = _elm_lang$core$Dict$fromList(
+		A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (v0, v1) {
+					return {ctor: '_Tuple2', _0: v0, _1: v1};
+				}),
+			A2(
+				_elm_lang$core$Result$withDefault,
+				{ctor: '[]'},
+				A2(_elm_lang$core$Json_Decode$decodeValue, _s6o$elm_simplify$Main$decoder, flags.data))));
 	return {
 		ctor: '_Tuple2',
 		_0: A3(
 			_s6o$elm_simplify$Main$Model,
-			_elm_lang$core$List$length(points),
+			_elm_lang$core$Dict$size(points),
 			_elm_lang$core$Maybe$Nothing,
 			_elm_lang$core$Maybe$Nothing),
 		_1: _elm_lang$core$Platform_Cmd$batch(

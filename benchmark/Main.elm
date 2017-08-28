@@ -3,6 +3,7 @@ module Main exposing (..)
 --import Benchmark exposing (Benchmark, benchmark3)
 --import Benchmark.Runner exposing (BenchmarkProgram, program)
 import Benchmark.LowLevel as B
+import Dict exposing (Dict)
 import Json.Decode exposing (Decoder, field, Value)
 import Html exposing (Html, div, text)
 import Simplify as S exposing (PixelTolerance, Quality)
@@ -31,7 +32,7 @@ type alias Model =
 
 type Msg
   = Bench (Result B.Error Time)
-  | Measure (List (Float, Float), Time)
+  | Measure (Dict Int (Float, Float), Time)
 
 
 {-| JSON decoder for test data loded via `Flags`
@@ -50,8 +51,10 @@ init flags =
     points =
       Json.Decode.decodeValue decoder flags.data
           |> Result.withDefault []
+          |> List.indexedMap (,)
+          |> Dict.fromList
   in
-    ( Model (List.length points) Nothing Nothing
+    ( Model (Dict.size points) Nothing Nothing
     , Cmd.batch
       [ B.operation3 S.simplify S.OnePixel S.Low points
           |> B.sample 1
@@ -60,7 +63,7 @@ init flags =
       ]
     )
 
-simplifyCmd : PixelTolerance -> Quality -> List (Float, Float) -> Cmd Msg
+simplifyCmd : PixelTolerance -> Quality -> Dict Int (Float, Float) -> Cmd Msg
 simplifyCmd pxlt q points =
   Task.perform Measure <|
     ( Time.now
