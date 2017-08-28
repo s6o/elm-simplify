@@ -65,6 +65,7 @@ type alias Model =
   , quality : Quality
   , simplified : Dict Int (Float, Float)
   , simplifiedTotal : Maybe Int
+  , sliderTolerance : PixelTolerance
   }
 
 type Msg
@@ -105,6 +106,7 @@ init flags =
       , quality = initQuality
       , simplified = Dict.empty
       , simplifiedTotal = Nothing
+      , sliderTolerance = initTolerance
       }
     , simplifyCmd initTolerance initQuality initData
     )
@@ -142,41 +144,44 @@ subscriptions model =
 {-|-}
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  let
-    updateTolerance s =
+  case msg of
+    Measure (spoints, t) ->
+      ( { model
+          | duration = Just <| t / 1.5 -- approx. diff between elm-benchmark and task based measurements
+          , simplified = spoints
+          , simplifiedTotal = Just <| Dict.size spoints
+        }
+      , Cmd.none
+      )
+    QualityHigh flag ->
+      let
+        q = if flag == True then S.High else S.Low
+      in
+        ( {model | quality = q}
+        , simplifyCmd model.pixelTolerance q model.data
+        )
+    Slider s ->
       String.toFloat s
         |> Result.map (\f ->
-          ( {model | pixelTolerance = S.Pixels f}
+          ( {model | sliderTolerance = S.Pixels f}
           , Cmd.none
           )
         )
         |> Result.withDefault (model, Cmd.none)
-  in
-    case msg of
-      Measure (spoints, t) ->
-        ( { model
-            | duration = Just t
-            , simplified = spoints
-            , simplifiedTotal = Just <| Dict.size spoints
-          }
-        , Cmd.none
+    Tolerance s ->
+      let
+        (m, _) =
+          String.toFloat s
+            |> Result.map (\f ->
+              ( {model | pixelTolerance = S.Pixels f}
+              , Cmd.none
+              )
+            )
+            |> Result.withDefault (model, Cmd.none)
+      in
+        ( m
+        , simplifyCmd m.pixelTolerance m.quality m.data
         )
-      QualityHigh flag ->
-        let
-          q = if flag == True then S.High else S.Low
-        in
-          ( {model | quality = q}
-          , simplifyCmd model.pixelTolerance q model.data
-          )
-      Slider s ->
-        updateTolerance s
-      Tolerance s ->
-        let
-          (m, _) = updateTolerance s
-        in
-          ( m
-          , simplifyCmd m.pixelTolerance m.quality m.data
-          )
 
 
 {-|-}
@@ -271,6 +276,11 @@ view model =
       ++ " when rendering a 70k-points line chart or a map route in the browser using Canvas or SVG."
       ]
 
+    , p []
+      [ text <|
+        "NOTE: due to Elm's runtime, time measurements are approximations."
+      ]
+
     , div
       [ class "canvas-container cf" ]
       [ p
@@ -282,13 +292,13 @@ view model =
             , HAttr.min "0.10"
             , HAttr.max "5.00"
             , HAttr.step "0.01"
-            , value <| toString <| pxlf model.pixelTolerance
+            , value <| toString <| pxlf model.sliderTolerance
             , style [("width", "100%")]
             , HEvt.on "change" (Json.Decode.map Tolerance HEvt.targetValue)
             , onInput Slider
             ]
             []
-          , text <| toString <| pxlf model.pixelTolerance
+          , text <| toString <| pxlf model.sliderTolerance
           ]
         ]
 
@@ -312,7 +322,7 @@ view model =
           )
         , text " times less)"
         , br [] []
-        , text "Performed in "
+        , text "Performed in ~"
         , em [ id "duration" ]
           ( model.duration
               |> Maybe.map (\t -> [ text <| toString t ])
