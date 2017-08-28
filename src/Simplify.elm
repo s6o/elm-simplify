@@ -32,9 +32,9 @@ type Quality
 
 {-| Simplify with Radial Distance and/or Ramer-Douglas-Peucker
 -}
-simplify : PixelTolerance -> Quality -> List (Float, Float) -> List (Float, Float)
+simplify : PixelTolerance -> Quality -> Dict Int (Float, Float) -> Dict Int (Float, Float)
 simplify tolerance quality points =
-  if List.length points <= 2 then
+  if Dict.size points <= 2 then
     points
   else
     let
@@ -44,7 +44,7 @@ simplify tolerance quality points =
           Pixels p -> p * p
       newPoints =
         case quality of
-          Low -> simplifyRadialDist points sqTolerance
+          Low -> simplifyRadialDistance points sqTolerance
           High -> points
     in
       simplifyDouglasPeucker newPoints sqTolerance
@@ -53,35 +53,35 @@ simplify tolerance quality points =
 
     simplify OnePixel Low
 -}
-simplifyDefault : List (Float, Float) -> List (Float, Float)
+simplifyDefault : Dict Int (Float, Float) -> Dict Int (Float, Float)
 simplifyDefault points =
   simplify OnePixel Low points
 
 
 {-| Basic distance-based simplification
 -}
-simplifyRadialDist : List (Float, Float) -> Float -> List (Float, Float)
-simplifyRadialDist points sqTolerance =
+simplifyRadialDistance : Dict Int (Float, Float) -> Float -> Dict Int (Float, Float)
+simplifyRadialDistance points sqTolerance =
   let
-    initAccum =
-      points |> List.take 1
-
-    checkSqDist pointList sqt accum =
+    checkSqDist pointList sqt (index, accum) =
       case (pointList, List.head accum) of
-        ([], _) -> accum
-        (x :: [], _) -> (x :: accum)
-        (x :: rest, Just p) ->
+        ([], _) ->
+          (index, accum)
+        (x :: [], _) ->
+          (index + 1, (index, x) :: accum)
+        (x :: rest, Nothing) ->
+          checkSqDist rest sqt (index + 1, (index, x) :: accum)
+        (x :: rest, Just (_, p)) ->
           let
             sqDist = squareDistance x p
           in
             if sqDist > sqt then
-              checkSqDist rest sqt (x :: accum)
+              checkSqDist rest sqt (index + 1, (index, x) :: accum)
             else
-              checkSqDist rest sqt accum
-        (_, _) -> accum -- satisfy compiler
+              checkSqDist rest sqt (index, accum)
   in
-    checkSqDist points sqTolerance initAccum
-      |> List.reverse
+    checkSqDist (Dict.values points) sqTolerance (0, [])
+      |> (\(_, accum) -> Dict.fromList accum)
 
 {-| Square distance between 2 points.
 -}
@@ -95,21 +95,21 @@ squareDistance (p1_x, p1_y) (p2_x, p2_y) =
 
 {-| Simplification using Ramer-Douglas-Peucker algorithm
 -}
-simplifyDouglasPeucker : List (Float, Float) -> Float -> List (Float, Float)
+simplifyDouglasPeucker : Dict Int (Float, Float) -> Float -> Dict Int (Float, Float)
 simplifyDouglasPeucker points sqTolerance =
   let
     firstIndex = 0
-    lastIndex = (List.length points) - 1
-    inputPoints =
-      points |> List.indexedMap (,) |> Dict.fromList
+    lastIndex = (Dict.size points) - 1
+    firstPoint = Dict.get firstIndex points
+    lastPoint = Dict.get lastIndex points
   in
-    simplifyDPStep inputPoints firstIndex lastIndex sqTolerance ([], [])
+    simplifyDPStep points firstIndex lastIndex sqTolerance ([], [])
       |> (\(_, accum) ->
-        let
-          sortedAccum = accum |> Dict.fromList |> Dict.values
-        in
-          Maybe.map2 (\fp lp -> (fp :: sortedAccum) ++ [lp]) (Dict.get firstIndex inputPoints) (Dict.get lastIndex inputPoints)
-            |> Maybe.withDefault sortedAccum
+        case (firstPoint, lastPoint) of
+          (Just fp, Just lp) ->
+              (firstIndex, fp) :: (lastIndex, lp) :: accum |> Dict.fromList
+          _ ->
+            Debug.crash "Should not be here: something went wrong in the public interface"
       )
 
 {-|-}
