@@ -380,7 +380,7 @@ view model =
       , dd []
         [ p []
           [ text <| "Convenience function. `PixelTolerance` is set to `OnePixel` "
-            ++ "and `Quality` is set to `Low`. Returns a list of simplified points."
+            ++ "and `Quality` is set to `Low`. Returns a dictionary of simplified points."
           ]
         ]
 
@@ -390,7 +390,7 @@ view model =
           ]
         ]
       , dd []
-        [ p [] [ text "Returns a list of simplified points." ]
+        [ p [] [ text "Returns a dictionary of simplified points." ]
         ]
 
       , dt []
