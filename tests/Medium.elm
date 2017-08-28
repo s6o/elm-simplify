@@ -1,7 +1,9 @@
 module Medium exposing
   ( suite
+  , points
   )
 
+import Dict exposing (Dict)
 import Expect exposing (Expectation)
 import Json.Decode exposing (Decoder, field)
 import Simplify as S
@@ -16,13 +18,14 @@ suite =
           \_ ->
             points
               |> S.simplifyDefault
-              |> List.length
-              |> Expect.equal (List.length simplified)
+              |> Dict.size
+              |> Expect.equal (Dict.size simplified)
         ]
     , describe "Check Simplify's medium sample set results with expected values"
         ( points
             |> S.simplifyDefault
-            |> List.map2 (,) simplified
+            |> Dict.values
+            |> List.map2 (,) (Dict.values simplified)
             |> List.map (\(expected, actual) ->
               test
                 ((toString expected) ++ ", " ++ (toString actual))
@@ -39,15 +42,19 @@ decoder =
         (field "x" Json.Decode.float)
         (field "y" Json.Decode.float)
 
-points : List (Float, Float)
+points : Dict Int (Float, Float)
 points =
   Json.Decode.decodeString decoder jsonPoints
     |> Result.withDefault []
+    |> List.indexedMap (,)
+    |> Dict.fromList
 
-simplified : List (Float, Float)
+simplified : Dict Int (Float, Float)
 simplified =
   Json.Decode.decodeString decoder jsonSimplified
     |> Result.withDefault []
+    |> List.indexedMap (,)
+    |> Dict.fromList
 
 jsonPoints : String
 jsonPoints =
