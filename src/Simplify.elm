@@ -7,7 +7,7 @@ module Simplify exposing
 
 {-| Port of Simplify.js http://mourner.github.io/simplify-js/
 
-Interactive demo https://s6o.github.io/elm-simplify/
+Interactive demo at https://s6o.github.io/elm-simplify/
 
 @docs PixelTolerance Quality simplify simplifyDefault
 
