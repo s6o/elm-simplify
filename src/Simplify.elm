@@ -9,7 +9,7 @@ module Simplify exposing
 
 Interactive demo at https://s6o.github.io/elm-simplify/
 
-@docs PixelTolerance Quality simplify simplifyDefault
+@docs PixelTolerance, Quality, simplify, simplifyDefault
 
 -}
 
