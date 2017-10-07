@@ -7,6 +7,8 @@ module Simplify exposing
 
 {-| Port of Simplify.js http://mourner.github.io/simplify-js/
 
+Interactive demo https://s6o.github.io/elm-simplify/
+
 @docs PixelTolerance Quality simplify simplifyDefault
 
 -}
@@ -56,7 +58,6 @@ simplify tolerance quality points =
 simplifyDefault : Dict Int (Float, Float) -> Dict Int (Float, Float)
 simplifyDefault points =
   simplify OnePixel Low points
-
 
 {-| Basic distance-based simplification
 -}
@@ -142,7 +143,6 @@ simplifyDPStep points firstIndex lastIndex sqTolerance (accumRanges, accumPoints
               (nextRanges, nextPoints)
             (f, t) :: rest ->
               simplifyDPStep points f t sqTolerance (rest, nextPoints)
-
 
 {-|-}
 findMaxSquareSegmentDistance : Dict Int (Float, Float) -> Int -> Int -> Float -> (Float, Int, (Float, Float))
