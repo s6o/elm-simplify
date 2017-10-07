@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "elm-simplify - port of Simplify.js - http://mourner.github.io/simplify-js",
-    "repository": "https://github.com/s6o/project.git",
+    "repository": "https://github.com/s6o/elm-simplify.git",
     "license": "BSD-3-Clause",
     "source-directories": [
         "src"
