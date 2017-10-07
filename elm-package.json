@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "summary": "elm-simplify - port of Simplify.js - http://mourner.github.io/simplify-js",
     "repository": "https://github.com/s6o/project.git",
     "license": "BSD-3-Clause",
